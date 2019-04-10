@@ -2,7 +2,10 @@ import { createAction, handleActions } from 'redux-actions';
 import axios from 'axios';
 import produce from 'immer';
 
-const API_URL = 'http://api.tvmaze.com';
+const API_URL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://api.tvmaze.com'
+    : 'http://api.tvmaze.com';
 
 const FETCH_MOVIE_PENDING = 'FETCH_MOVIE_PENDING';
 const FETCH_MOVIE_SUCCESS = 'FETCH_MOVIE_SUCCESS';

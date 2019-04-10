@@ -79,7 +79,9 @@ const SearchBox = ({
       onChange={onChange}
       onKeyDown={onKeyDown}
       placeholder={
-        hasResult ? `${resultQuery}에 대한 ${length}개의 결과` : 'SEARCH'
+        hasResult
+          ? `${resultQuery}에 대한 ${length}개의 결과`
+          : 'SEARCH TV SHOW'
       }
       autoComplete="off"
     />
