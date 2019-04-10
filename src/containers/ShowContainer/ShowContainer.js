@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -8,7 +8,7 @@ import * as dataActions from 'modules/data';
 import MovieList from 'components/MovieList';
 import Spinner from 'components/Spinner';
 
-class ShowContainer extends PureComponent {
+class ShowContainer extends Component {
   lazyImages = [];
 
   active = false;
@@ -21,8 +21,27 @@ class ShowContainer extends PureComponent {
     window.addEventListener('orientationchange', this.handleLazyLoadImages);
   }
 
+  shouldComponentUpdate(nextProps) {
+    const { movieData, isLoading, resultQuery } = this.props;
+
+    return (
+      movieData !== nextProps.movieData ||
+      isLoading !== nextProps.isLoading ||
+      resultQuery !== nextProps.resultQuery
+    );
+  }
+
   componentDidUpdate(prevProps) {
-    const { movieData } = this.props;
+    const {
+      movieData,
+      match: {
+        params: { query }
+      }
+    } = this.props;
+
+    if (query !== prevProps.match.params.query) {
+      this.handleFetchMovieData();
+    }
 
     if (prevProps.movieData !== movieData) {
       this.lazyImages = Array.from(document.querySelectorAll('.lazy-load'));
@@ -80,12 +99,16 @@ class ShowContainer extends PureComponent {
       match: {
         params: { query }
       },
+      resultQuery,
       DataActions: { fetchMovie },
       SearchActions: { resetQuery, setResultQuery }
     } = this.props;
 
+    if (!resultQuery) {
+      setResultQuery({ resultQuery: query });
+    }
+
     fetchMovie({ query });
-    setResultQuery({ resultQuery: query });
     resetQuery();
   };
 

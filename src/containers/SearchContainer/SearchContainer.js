@@ -30,7 +30,13 @@ class SearchContainer extends PureComponent {
   };
 
   onSubmit = () => {
-    const { history, query } = this.props;
+    const {
+      history,
+      query,
+      SearchActions: { setResultQuery }
+    } = this.props;
+
+    setResultQuery({ resultQuery: query });
     history.push(`/result/${query}`);
   };
 

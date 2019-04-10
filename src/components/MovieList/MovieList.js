@@ -23,14 +23,14 @@ const Wrapper = styled.div`
 const MovieList = ({ movieData }) => {
   return (
     <Wrapper>
-      {movieData.map((movie, index) => (
+      {movieData.map(({ show }, index) => (
         <MovieItem
-          key={movie.show.id}
+          key={show.id}
           index={index}
-          name={movie.show.name}
-          image={movie.show.image && movie.show.image.medium}
-          summary={movie.show.summary}
-          rating={movie.show.rating}
+          name={show.name}
+          image={show.image && show.image.medium}
+          summary={show.summary}
+          rating={show.rating}
         />
       ))}
     </Wrapper>
