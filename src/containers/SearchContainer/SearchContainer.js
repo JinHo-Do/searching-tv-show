@@ -11,6 +11,18 @@ class SearchContainer extends PureComponent {
   input = createRef();
 
   componentDidMount() {
+    const iOS =
+      !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+
+    if (iOS) {
+      if ('scrollRestoration' in window.history) {
+        this._oldScrollRestoration = window.history.scrollRestoration;
+        window.history.scrollRestoration = 'manual';
+      } else {
+        this._oldScrollRestoration = null;
+      }
+    }
+
     window.scrollTo(0, 0);
     this.input.current.focus();
   }
@@ -38,6 +50,7 @@ class SearchContainer extends PureComponent {
     } = this.props;
 
     setResultQuery({ resultQuery: query });
+    this.input.current.blur();
     history.push(`/result/${query}`);
   };
 
