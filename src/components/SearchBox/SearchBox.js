@@ -72,7 +72,6 @@ const Input = styled.input`
   color: #e9ecef;
   padding: 10px 50px;
   font-size: 50px;
-  line-height: 50px;
   background: #212529;
   border: none;
   border-bottom: 3px solid #495057;
@@ -80,24 +79,20 @@ const Input = styled.input`
   ${media.w1024`
     height: 80px;
     font-size: 40px;
-    line-height: 40px;
     padding: 10px 10px;
   `}
   ${media.w768`
     height: 60px;
     font-size: 24px;
-    line-height: 24px;
   `}
   ${media.w425`
     height: 60px;
     font-size: 20px;
-    line-height: 20px;
+    padding: 5px 0px;
   `}
   ${media.w375`
     height: 50px;
     font-size: 18px;
-    line-height: 18px;
-    padding: 10px 0px;
   `}
 `;
 
@@ -152,16 +147,17 @@ const SearchBox = ({
   onKeyDown,
   setRef,
   hasResult,
-  resultQuery
+  resultQuery,
+  isLoading
 }) => (
-  <Wrapper className={hasResult ? 'search-top' : 'search-middle'}>
+  <Wrapper className={hasResult || isLoading ? 'search-top' : 'search-middle'}>
     <Input
       ref={setRef}
       name="search"
       value={value}
       onChange={onChange}
       onKeyDown={onKeyDown}
-      placeholder={hasResult ? `${resultQuery}` : 'SEARCH TV SHOW'}
+      placeholder={resultQuery ? `${resultQuery}` : 'SEARCH TV SHOW'}
       autoComplete="off"
     />
     <Button value={value} onClick={onSubmit}>

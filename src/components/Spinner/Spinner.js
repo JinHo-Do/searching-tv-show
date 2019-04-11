@@ -9,9 +9,9 @@ const Wrapper = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-const Spinner = () => (
+const Spinner = ({ type }) => (
   <Wrapper>
-    <Loader type="Watch" color="#00BFFF" height="100" width="100" />
+    <Loader type={type} color="#00BFFF" height="100" width="100" />
   </Wrapper>
 );
 

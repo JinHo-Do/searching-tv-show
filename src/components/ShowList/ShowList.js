@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import { media } from 'utils/style-utils';
 
-import MovieItem from 'components/MovieItem';
+import ShowItem from 'components/ShowItem';
 
 const opacity = keyframes`
   from {
@@ -24,21 +25,22 @@ const Wrapper = styled.div`
   `}
 `;
 
-const MovieList = ({ movieData }) => {
+const ShowList = ({ movieData }) => {
   return (
     <Wrapper>
       {movieData.map(({ show }, index) => (
-        <MovieItem
-          key={show.id}
-          index={index}
-          name={show.name}
-          image={show.image && show.image.medium}
-          summary={show.summary}
-          rating={show.rating}
-        />
+        <Link to={`/show/${show.id}`} key={show.id}>
+          <ShowItem
+            index={index}
+            name={show.name}
+            image={show.image && show.image.medium}
+            summary={show.summary}
+            rating={show.rating}
+          />
+        </Link>
       ))}
     </Wrapper>
   );
 };
 
-export default MovieList;
+export default ShowList;

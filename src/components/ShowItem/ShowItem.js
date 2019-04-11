@@ -40,7 +40,7 @@ const BodyWrapper = styled.div`
   `}
   ${media.w425`
     width: calc(100% - 14px);
-    padding: 0 0 0 15px;
+    padding: 5px 0 0 15px;
   `}
 `;
 
@@ -51,6 +51,11 @@ const Title = styled.h3`
   ${media.w425`
     margin: 0 0 10px;
     font-size: 20px;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    word-wrap:normal;
+    width:200px;
+    overflow:hidden;
   `}
 `;
 
@@ -81,7 +86,7 @@ const Summary = styled.div`
 
 const Rating = styled.div`
   position: absolute;
-  bottom: 16px;
+  bottom: 10px;
   font-size: 20px;
   font-weight: bold;
   ${media.w425`
@@ -89,7 +94,7 @@ const Rating = styled.div`
   `}
 `;
 
-const MovieItem = ({ name, index, image, summary, rating }) => {
+const ShowItem = ({ name, index, image, summary, rating }) => {
   return (
     <Wrapper>
       <ThumbnailWrapper>
@@ -109,4 +114,4 @@ const MovieItem = ({ name, index, image, summary, rating }) => {
   );
 };
 
-export default MovieItem;
+export default ShowItem;

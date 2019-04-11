@@ -11,6 +11,7 @@ class SearchContainer extends PureComponent {
   input = createRef();
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     this.input.current.focus();
   }
 
@@ -41,7 +42,13 @@ class SearchContainer extends PureComponent {
   };
 
   render() {
-    const { query, resultQuery, movieData } = this.props;
+    const {
+      query,
+      resultQuery,
+      movieData,
+      movieDetail,
+      isLoading
+    } = this.props;
     const { onChangeInput, onSubmit, onKeyDown, input } = this;
 
     return (
@@ -52,8 +59,9 @@ class SearchContainer extends PureComponent {
           onChange={onChangeInput}
           onKeyDown={onKeyDown}
           onSubmit={onSubmit}
-          hasResult={!!movieData.length}
+          hasResult={!!movieData.length || movieDetail}
           resultQuery={resultQuery}
+          isLoading={isLoading}
         />
       </>
     );
@@ -61,7 +69,9 @@ class SearchContainer extends PureComponent {
 }
 
 const mapStateToProps = state => ({
+  isLoading: state.data.isLoading,
   movieData: state.data.movieData,
+  movieDetail: state.data.movieDetail,
   query: state.search.query,
   resultQuery: state.search.resultQuery
 });

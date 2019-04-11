@@ -5,15 +5,16 @@ import { bindActionCreators } from 'redux';
 import * as searchActions from 'modules/search';
 import * as dataActions from 'modules/data';
 
-import MovieList from 'components/MovieList';
+import ShowList from 'components/ShowList';
 import Spinner from 'components/Spinner';
 
-class ShowContainer extends Component {
+class ShowListContainer extends Component {
   lazyImages = [];
 
   active = false;
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     this.handleFetchMovieData();
 
     window.addEventListener('scroll', this.handleLazyLoadImages);
@@ -117,8 +118,8 @@ class ShowContainer extends Component {
 
     return (
       <>
-        {isLoading && <Spinner />}
-        {!!movieData.length && <MovieList movieData={movieData} />}
+        {isLoading && <Spinner type="Watch" />}
+        {!!movieData.length && <ShowList movieData={movieData} />}
       </>
     );
   }
@@ -140,4 +141,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ShowContainer);
+)(ShowListContainer);

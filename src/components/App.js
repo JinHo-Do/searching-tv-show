@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { Route } from 'react-router-dom';
 
 import SearchContainer from 'containers/SearchContainer';
-import ShowContainer from 'containers/ShowContainer';
+import ShowListContainer from 'containers/ShowListContainer';
+import ShowDetailContainer from 'containers/ShowDetailContainer';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -12,7 +13,8 @@ const Wrapper = styled.div`
 const App = () => (
   <Wrapper>
     <Route path="/" component={SearchContainer} />
-    <Route path="/result/:query" component={ShowContainer} />
+    <Route path="/result/:query" component={ShowListContainer} />
+    <Route path="/show/:id" component={ShowDetailContainer} />
   </Wrapper>
 );
 
