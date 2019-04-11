@@ -1,34 +1,57 @@
 import React from 'react';
 import styled from 'styled-components';
+import { media } from 'utils/style-utils';
 
 const Wrapper = styled.div`
   display: flex;
   width: 100%;
   height: 300px;
-  padding: 20px 50px 20px 0px;
+  margin-bottom: 10px;
+  padding: 10px;
   background: #343a40;
+  ${media.w425`
+    padding: 15px;
+    height: 180px;
+  `}
 `;
 
 const ThumbnailWrapper = styled.div`
-  width: 20%;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  width: 200px;
+  ${media.w425`
+    width: 140px;
+  `}
 `;
 
 const Thumbnail = styled.img`
-  width: auto;
-  height: 100%;
+  display: inline-block;
+  width: 100%;
+  height: auto;
 `;
 
 const BodyWrapper = styled.div`
   position: relative;
   width: 80%;
   height: 100%;
+  padding: 10px 20px;
+  ${media.w1024`
+    width: calc(100% - 200px);
+  `}
+  ${media.w425`
+    width: calc(100% - 14px);
+    padding: 0 0 0 15px;
+  `}
 `;
 
 const Title = styled.h3`
   margin: 10px 0 20px;
   font-size: 30px;
   font-weight: bold;
+  ${media.w425`
+    margin: 0 0 10px;
+    font-size: 20px;
+  `}
 `;
 
 const Summary = styled.div`
@@ -39,11 +62,17 @@ const Summary = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
     word-wrap: break-word;
     line-height: 1.6;
     height: ${1.6 * 5}em;
+    ${media.w425`
+      font-size: 16px;
+      -webkit-line-clamp: 3;
+      line-height: 1.6;
+      height: ${1.6 * 3}em;
+    `}
   }
   p {
     display: none;
@@ -52,9 +81,12 @@ const Summary = styled.div`
 
 const Rating = styled.div`
   position: absolute;
-  bottom: 10px;
+  bottom: 16px;
   font-size: 20px;
   font-weight: bold;
+  ${media.w425`
+    font-size: 16px;
+  `}
 `;
 
 const MovieItem = ({ name, index, image, summary, rating }) => {

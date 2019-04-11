@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { media } from 'utils/style-utils';
 
 const Wrapper = styled.div`
   position: absolute;
@@ -10,6 +11,7 @@ const Wrapper = styled.div`
   max-width: 1170px;
   text-align: center;
   transition: top 0.4s;
+  
   &.search-top {
     max-width: 1170px;
     top: 80px;
@@ -17,11 +19,50 @@ const Wrapper = styled.div`
       width: 70%;
       height: 60px;
       font-size: 50px;
+      ${media.w1024`
+        font-size: 36px;
+        line-height: 36px;
+      `}
+      ${media.w768`
+        font-size: 24px;
+        line-height: 24px;
+        padding: 10px 10px;
+      `}
+      ${media.w425`
+        height: 50px;
+        font-size: 20px;
+        line-height: 20px;
+      `}
     }
     button {
+      font-size: 46px;
       height: 60px;
+      ${media.w1024`
+        font-size: 36px;
+        line-height: 36px;
+      `}
+      ${media.w768`
+        font-size: 24px;
+        line-height: 24px;
+      `}
+      ${media.w425`
+        height: 50px;
+        font-size: 20px;
+        line-height: 20px;
+      `}
+      ${media.w375`
+        font-size: 18px;
+        line-height: 18px;
+        padding: 10px 0px;
+      `}
     }
+    ${media.w425`
+      top: 50px;
+    `}
   }
+  ${media.w425`
+    width:90%;
+  `}
 `;
 
 const Input = styled.input`
@@ -36,6 +77,28 @@ const Input = styled.input`
   border: none;
   border-bottom: 3px solid #495057;
   transition: all 0.4s;
+  ${media.w1024`
+    height: 80px;
+    font-size: 40px;
+    line-height: 40px;
+    padding: 10px 10px;
+  `}
+  ${media.w768`
+    height: 60px;
+    font-size: 24px;
+    line-height: 24px;
+  `}
+  ${media.w425`
+    height: 60px;
+    font-size: 20px;
+    line-height: 20px;
+  `}
+  ${media.w375`
+    height: 50px;
+    font-size: 18px;
+    line-height: 18px;
+    padding: 10px 0px;
+  `}
 `;
 
 const Button = styled.button`
@@ -59,6 +122,27 @@ const Button = styled.button`
     color: ${({ value }) => (value === '' ? '#e03131' : '#212529')}
     border: 3px solid #e9ecef;
   }
+  ${media.w1024`
+    height: 80px;
+    font-size: 40px;
+    line-height: 40px;
+  `}
+  ${media.w768`
+    height: 60px;
+    font-size: 24px;
+    line-height: 24px;
+  `}
+  ${media.w425`
+    height: 60px;
+    font-size: 20px;
+    line-height: 20px;
+    padding: 0;
+  `}
+  ${media.w375`
+    height: 50px;
+    font-size: 16px;
+    line-height: 16px;
+  `}
 `;
 
 const SearchBox = ({
@@ -68,8 +152,7 @@ const SearchBox = ({
   onKeyDown,
   setRef,
   hasResult,
-  resultQuery,
-  length
+  resultQuery
 }) => (
   <Wrapper className={hasResult ? 'search-top' : 'search-middle'}>
     <Input
@@ -78,11 +161,7 @@ const SearchBox = ({
       value={value}
       onChange={onChange}
       onKeyDown={onKeyDown}
-      placeholder={
-        hasResult
-          ? `${resultQuery}에 대한 ${length}개의 결과`
-          : 'SEARCH TV SHOW'
-      }
+      placeholder={hasResult ? `${resultQuery}` : 'SEARCH TV SHOW'}
       autoComplete="off"
     />
     <Button value={value} onClick={onSubmit}>

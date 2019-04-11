@@ -54,7 +54,6 @@ class SearchContainer extends PureComponent {
           onSubmit={onSubmit}
           hasResult={!!movieData.length}
           resultQuery={resultQuery}
-          length={movieData.length}
         />
       </>
     );
