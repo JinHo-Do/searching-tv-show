@@ -23,6 +23,7 @@ const Name = styled.h1`
 
 const BodyWrapper = styled.div`
   display: flex;
+  margin-top: 10px;
 `;
 
 const InfoWrapper = styled.div`
@@ -35,7 +36,6 @@ const Poster = styled.img`
 
 const Summary = styled.div`
   width: 70%;
-  margin-top: 10px;
   padding-left: 20px;
   font-size: 20px;
   line-height: 1.4;
@@ -56,7 +56,7 @@ const ShowDetail = ({ movieDetail }) => {
     officialSite,
     schedule,
     rating: { average },
-    image: { medium },
+    image,
     summary
   } = movieDetail;
 
@@ -65,7 +65,7 @@ const ShowDetail = ({ movieDetail }) => {
       <Name>{name}</Name>
       <BodyWrapper>
         <InfoWrapper>
-          <Poster src={medium} alt={name} />
+          {image && <Poster src={image.medium} alt={name} />}
           <div>{language}</div>
           <div>{status}</div>
           <div>{runtime}</div>

@@ -50,12 +50,6 @@ class ShowListContainer extends Component {
   }
 
   componentWillUnmount() {
-    const {
-      DataActions: { resetMovieData }
-    } = this.props;
-
-    resetMovieData();
-
     window.removeEventListener('scroll', this.handleLazyLoadImages);
     window.removeEventListener('resize', this.handleLazyLoadImages);
     window.removeEventListener('orientationchange', this.handleLazyLoadImages);

@@ -27,6 +27,19 @@ class SearchContainer extends PureComponent {
     this.input.current.focus();
   }
 
+  componentDidUpdate(prevProps) {
+    const {
+      location: { pathname },
+      SearchActions: { setResultQuery },
+      DataActions: { resetMovieData }
+    } = this.props;
+
+    if (prevProps.location.pathname !== '/' && pathname === '/') {
+      setResultQuery({ resultQuery: '' });
+      resetMovieData();
+    }
+  }
+
   onChangeInput = e => {
     const { value } = e.target;
     const {
