@@ -7,7 +7,6 @@ import { BrowserRouter } from 'react-router-dom';
 import App from 'components/App';
 
 const Layout = styled.div`
-  max-width: 1920px;
   min-height: 100vh;
   width: 100%;
   height: auto;

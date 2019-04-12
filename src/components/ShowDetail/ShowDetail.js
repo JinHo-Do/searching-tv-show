@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { media } from 'utils/style-utils';
+
+import Tabs from './Tabs';
+import Main from './Main';
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,64 +20,13 @@ const Wrapper = styled.div`
   `}
 `;
 
-const Name = styled.h1`
-  font-size: 60px;
-`;
-
-const BodyWrapper = styled.div`
-  display: flex;
-  margin-top: 10px;
-`;
-
-const InfoWrapper = styled.div`
-  width: 30%;
-`;
-
-const Poster = styled.img`
-  width: 100%;
-`;
-
-const Summary = styled.div`
-  width: 70%;
-  padding-left: 20px;
-  font-size: 20px;
-  line-height: 1.4;
-  word-wrap: break-word;
-  p + p {
-    margin-top: 20px;
-  }
-`;
-
 const ShowDetail = ({ movieDetail }) => {
-  const {
-    name,
-    language,
-    genres,
-    status,
-    runtime,
-    premiered,
-    officialSite,
-    schedule,
-    rating: { average },
-    image,
-    summary
-  } = movieDetail;
+  const [selectedTab, onClickTab] = useState('Main');
 
   return (
     <Wrapper>
-      <Name>{name}</Name>
-      <BodyWrapper>
-        <InfoWrapper>
-          {image && <Poster src={image.medium} alt={name} />}
-          <div>{language}</div>
-          <div>{status}</div>
-          <div>{runtime}</div>
-          <div>{premiered}</div>
-          <div>{schedule.time}</div>
-          <div>{schedule.day}</div>
-        </InfoWrapper>
-        <Summary dangerouslySetInnerHTML={{ __html: summary }} />
-      </BodyWrapper>
+      <Tabs selectedTab={selectedTab} onClickTab={tab => onClickTab(tab)} />
+      <Main selectedTab={selectedTab} movieDetail={movieDetail} />
     </Wrapper>
   );
 };

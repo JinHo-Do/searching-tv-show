@@ -6,6 +6,8 @@ const API_URL =
   process.env.NODE_ENV === 'production'
     ? 'https://api.tvmaze.com'
     : 'http://api.tvmaze.com';
+const SEARCH_URL = `${API_URL}/search/shows?q=`;
+const DETAIL_URL = `${API_URL}/shows/`;
 
 const FETCH_MOVIE_PENDING = 'FETCH_MOVIE_PENDING';
 const FETCH_MOVIE_SUCCESS = 'FETCH_MOVIE_SUCCESS';
@@ -19,6 +21,9 @@ const fetchMovieSuccess = createAction(FETCH_MOVIE_SUCCESS);
 const fetchMovieDetailSuccess = createAction(FETCH_MOVIE_DETAIL_SUCCESS);
 const fetchMovieFailure = createAction(FETCH_MOVIE_FAILURE);
 
+const searchUrl = query => `${SEARCH_URL + query}`;
+const detailUrl = id => `${DETAIL_URL + id}?embed[]=episodes&embed[]=cast`;
+
 export const resetMovieData = createAction(RESET_MOVIE_DATA);
 export const resetMovieDetail = createAction(RESET_MOVIE_DETAIL);
 
@@ -26,7 +31,7 @@ export const fetchMovie = ({ query }) => async dispatch => {
   dispatch(fetchMoviePending());
 
   try {
-    const { data } = await axios.get(`${API_URL}/search/shows?q=${query}`);
+    const { data } = await axios.get(searchUrl(query));
     dispatch(fetchMovieSuccess(data));
   } catch (error) {
     console.log('FETCH MOVIE LIST ERROR: ', error);
@@ -38,7 +43,7 @@ export const fetchMovieDetail = ({ id }) => async dispatch => {
   dispatch(fetchMoviePending());
 
   try {
-    const { data } = await axios.get(`${API_URL}/shows/${id}`);
+    const { data } = await axios.get(detailUrl(id));
     dispatch(fetchMovieDetailSuccess(data));
   } catch (error) {
     console.log('FETCH MOVIE DETAIL ERROR: ', error);

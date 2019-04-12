@@ -141,14 +141,14 @@ const Button = styled.button`
 `;
 
 const SearchBox = ({
-  onChange,
+  isLoading,
+  resultQuery,
   value,
   onSubmit,
+  onChange,
   onKeyDown,
   setRef,
-  hasResult,
-  resultQuery,
-  isLoading
+  hasResult
 }) => (
   <Wrapper className={hasResult || isLoading ? 'search-top' : 'search-middle'}>
     <Input
@@ -157,8 +157,8 @@ const SearchBox = ({
       value={value}
       onChange={onChange}
       onKeyDown={onKeyDown}
-      placeholder={resultQuery ? `${resultQuery}` : 'SEARCH TV SHOW'}
       autoComplete="off"
+      placeholder={resultQuery ? `${resultQuery}` : 'SEARCH TV SHOW'}
     />
     <Button value={value} onClick={onSubmit}>
       SUBMIT
