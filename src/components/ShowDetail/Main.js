@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-// import { media } from 'utils/style-utils';
+
+const Wrapper = styled.div`
+  width: 100%;
+  background: #495057;
+  padding: 20px;
+`;
 
 const Name = styled.h1`
   font-size: 60px;
@@ -40,7 +45,7 @@ const Info = styled.p`
   }
 `;
 
-const ShowDetail = ({ movieDetail }) => {
+const Main = ({ movieDetail }) => {
   const {
     name,
     language,
@@ -48,14 +53,12 @@ const ShowDetail = ({ movieDetail }) => {
     runtime,
     premiered,
     officialSite,
-    // schedule,
-    // rating: { average },
     image,
     summary
   } = movieDetail;
 
   return (
-    <>
+    <Wrapper>
       <Name>{name}</Name>
       <BodyWrapper>
         <InfoWrapper>
@@ -89,8 +92,8 @@ const ShowDetail = ({ movieDetail }) => {
         </InfoWrapper>
         <Summary dangerouslySetInnerHTML={{ __html: summary }} />
       </BodyWrapper>
-    </>
+    </Wrapper>
   );
 };
 
-export default ShowDetail;
+export default Main;

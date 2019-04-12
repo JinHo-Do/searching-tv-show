@@ -9,17 +9,9 @@ import ShowList from 'components/ShowList';
 import Spinner from 'components/Spinner';
 
 class ShowListContainer extends Component {
-  lazyImages = [];
-
-  active = false;
-
   componentDidMount() {
     window.scrollTo(0, 0);
     this.handleFetchMovieData();
-
-    window.addEventListener('scroll', this.handleLazyLoadImages);
-    window.addEventListener('resize', this.handleLazyLoadImages);
-    window.addEventListener('orientationchange', this.handleLazyLoadImages);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -34,7 +26,6 @@ class ShowListContainer extends Component {
 
   componentDidUpdate(prevProps) {
     const {
-      movieData,
       match: {
         params: { query }
       }
@@ -43,51 +34,7 @@ class ShowListContainer extends Component {
     if (query !== prevProps.match.params.query) {
       this.handleFetchMovieData();
     }
-
-    if (prevProps.movieData !== movieData) {
-      this.lazyImages = Array.from(document.querySelectorAll('.lazy-load'));
-    }
   }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleLazyLoadImages);
-    window.removeEventListener('resize', this.handleLazyLoadImages);
-    window.removeEventListener('orientationchange', this.handleLazyLoadImages);
-  }
-
-  handleLazyLoadImages = () => {
-    if (!this.active) {
-      const { innerHeight } = window;
-      this.active = true;
-
-      setTimeout(() => {
-        this.lazyImages.forEach(lazyImage => {
-          if (
-            lazyImage.getBoundingClientRect().top <= innerHeight &&
-            lazyImage.getBoundingClientRect().bottom >= 0
-          ) {
-            lazyImage.src = lazyImage.dataset.src;
-            lazyImage.classList.remove('lazy-load');
-
-            this.lazyImages = this.lazyImages.filter(
-              image => image !== lazyImage
-            );
-
-            if (this.lazyImages.length === 0) {
-              window.removeEventListener('scroll', this.handleLazyLoadImages);
-              window.removeEventListener('resize', this.handleLazyLoadImages);
-              window.removeEventListener(
-                'orientationchange',
-                this.handleLazyLoadImages
-              );
-            }
-          }
-        });
-
-        this.active = false;
-      }, 200);
-    }
-  };
 
   handleFetchMovieData = () => {
     const {

@@ -1,23 +1,18 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { media } from 'utils/style-utils';
 
-import Tabs from './Tabs';
+import ShowDetailTabs from 'components/ShowDetailTabs';
+import ShowEpisodes from 'components/ShowEpisodes';
 import Main from './Main';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  position: relative;
   max-width: 1170px;
   width: 100%;
-  top: 150px;
   margin: 0 auto;
   padding: 20px;
   background: #343a40;
-  ${media.w425`
-    top: 96px;
-  `}
 `;
 
 const ShowDetail = ({ movieDetail }) => {
@@ -25,8 +20,16 @@ const ShowDetail = ({ movieDetail }) => {
 
   return (
     <Wrapper>
-      <Tabs selectedTab={selectedTab} onClickTab={tab => onClickTab(tab)} />
-      <Main selectedTab={selectedTab} movieDetail={movieDetail} />
+      <ShowDetailTabs
+        selectedTab={selectedTab}
+        onClickTab={tab => onClickTab(tab)}
+      />
+      {selectedTab === 'Main' && <Main movieDetail={movieDetail} />}
+      {selectedTab === 'Episodes' && (
+        <ShowEpisodes
+          episodes={movieDetail._embedded && movieDetail._embedded.episodes}
+        />
+      )}
     </Wrapper>
   );
 };
