@@ -10,16 +10,19 @@ const Wrapper = styled.div`
   padding: 10px;
   background: #495057;
   ${media.w425`
+    flex-direction: column;
     padding: 15px;
   `}
 `;
 
 const ThumbnailWrapper = styled.div`
   display: flex;
-  align-items: flex-start;
-  width: 200px;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
   ${media.w425`
-    width: 140px;
+    width: 100%;
+    padding: 10px 20px;
   `}
 `;
 
@@ -27,12 +30,14 @@ const Thumbnail = styled.img`
   display: inline-block;
   width: 100%;
   height: auto;
-  margin-top: 30px;
+  ${media.w425`
+  margin-top: 0;
+  `}
 `;
 
 const BodyWrapper = styled.div`
   position: relative;
-  width: 80%;
+  width: 70%;
   height: 100%;
   padding: 10px 20px;
   ${media.w1024`
@@ -66,6 +71,7 @@ const Summary = styled.div`
 
 const AirDate = styled.div`
   font-size: 16px;
+  margin-top: 10px;
 `;
 
 const ShowEpisodeItem = ({ episode, index }) => {
