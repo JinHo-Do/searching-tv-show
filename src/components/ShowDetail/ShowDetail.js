@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import ShowDetailTabs from 'components/ShowDetailTabs';
 import ShowEpisodes from 'components/ShowEpisodes';
+import ShowCastList from 'components/ShowCastList';
 import Main from './Main';
 
 const Wrapper = styled.div`
@@ -28,6 +29,11 @@ const ShowDetail = ({ movieDetail }) => {
       {selectedTab === 'Episodes' && (
         <ShowEpisodes
           episodes={movieDetail._embedded && movieDetail._embedded.episodes}
+        />
+      )}
+      {selectedTab === 'Cast' && (
+        <ShowCastList
+          cast={movieDetail._embedded && movieDetail._embedded.cast}
         />
       )}
     </Wrapper>
